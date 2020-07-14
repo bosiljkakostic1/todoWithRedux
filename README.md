@@ -1,3 +1,6 @@
+This is a classic todo app transformed to work with Redux, with added some new fields, and page navigation controls, same as delete, update features, and a small menu for my learning purposes. It is connected on the PostgreSQL database, data is provided via the YII PHP framework API.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
