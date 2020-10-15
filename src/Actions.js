@@ -35,6 +35,7 @@ export function addToDo(payload){
     }
 }
 export function toggleToDo(payload){
+    console.log(payload);
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     let today = new Date();

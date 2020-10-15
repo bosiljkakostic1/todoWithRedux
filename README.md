@@ -1,4 +1,22 @@
 This is a classic todo app transformed to work with Redux, with added some new fields, and page navigation controls, same as delete, update features, and a small menu for my learning purposes. It is connected on the PostgreSQL database, data is provided via the YII PHP framework API.
+The Application screenShoot is at ./public.todo.png
+
+Database postgress (change restfull api address http://resb.local/todoitem with your local settings)
+table: 
+-- public.todoitem definition
+
+-- Drop table
+
+-- DROP TABLE public.todoitem;
+
+CREATE TABLE public.todoitem (
+	id int4 NOT NULL GENERATED ALWAYS AS IDENTITY,
+	"action" varchar(255) NULL,
+	start_date varchar(20) NOT NULL,
+	end_date varchar(20) NULL,
+	done bool NOT NULL
+);
+CREATE UNIQUE INDEX todoitem_id_idx ON public.todoitem USING btree (id);
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
