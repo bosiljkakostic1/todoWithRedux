@@ -7,13 +7,18 @@ function mapDispatchToProps (dispatch) {
         addToDo: (toDoItem) => {dispatch(addToDo(toDoItem));},
     }
 }
+function mapStateToProps(state) {
+    console.log(state);
+    return {todoItems: state.todoItems};
+}
 class TodoCreatorConnect extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        console.log(props);
+        this.state = Object.assign({}, {todoItems: props.todoItems}, {             
             newItemText: "" 
-        }
+        });
     }
 
     updateNewTextValue = (event) => {
@@ -22,13 +27,18 @@ class TodoCreatorConnect extends Component {
 
     createNewTodo = () => {
         //this.props.callback(this.state.newItemText);
-        let newTotal = this.state.total ? this.state.total + 1 : 1;
-        this.props.addToDo(this.state.newItemText);
-        this.setState({
-            total: newTotal,
-            pageCount: Math.ceil(newTotal/(this.state.perPageCnt? this.state.perPageCnt:20))            
-        })
-        this.setState({ newItemText: ""});
+        // check if exists this.state.newItemText in this.props.todoitems
+        if (this.props.todoItems.find(item => item.action === this.state.newItemText) === undefined){
+            let newTotal = this.state.total ? this.state.total + 1 : 1;
+            this.props.addToDo(this.state.newItemText);
+            this.setState({
+                total: newTotal,
+                pageCount: Math.ceil(newTotal/(this.state.perPageCnt? this.state.perPageCnt:20))            
+            })
+            this.setState({ newItemText: ""});
+        } else {
+            alert (`This ( ${this.state.newItemText} )action already exsist !!`);
+        }
     }
 
     render = () =>
@@ -39,5 +49,5 @@ class TodoCreatorConnect extends Component {
                 onClick={ this.createNewTodo }>Add</button>
         </div>            
 }
-const TodoCreator = connect(null, mapDispatchToProps)(TodoCreatorConnect);
+const TodoCreator = connect(mapStateToProps, mapDispatchToProps)(TodoCreatorConnect);
 export default TodoCreator;

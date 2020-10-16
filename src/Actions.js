@@ -25,8 +25,22 @@ export function addToDo(payload){
             return response.json();
         })
         .then(data => {
-            dispatch({type:ADD_TODO, data});
-            })
+            // first find id based on action
+            let newOptions = {
+              method: 'GET',
+              headers: myHeaders,
+              redirect: 'follow'              
+            };
+            fetch("http://resb.local/todoitem?filter[action]=" + data.action, newOptions)
+              .then(response1 => {
+                return response1.json();
+              }).then(data1 => {
+                console.log('data1', data1);
+              dispatch({type:ADD_TODO, data: data1[0]});
+            }).catch(error1 => {
+              console.log('error1', error1);
+              alert('ERROR1: The data was not added: ' + error1);
+            })})
         .catch(error => {
             console.log('error', error);
             alert('ERROR: The data was not added: ' + error);
