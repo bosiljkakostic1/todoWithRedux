@@ -8,7 +8,6 @@ function mapDispatchToProps (dispatch) {
     }
 }
 function mapStateToProps(state) {
-    console.log(state);
     return {todoItems: state.todoItems};
 }
 class TodoCreatorConnect extends Component {
@@ -37,7 +36,7 @@ class TodoCreatorConnect extends Component {
             })
             this.setState({ newItemText: ""});
         } else {
-            alert (`This ( ${this.state.newItemText} )action already exsist !!`);
+            alert (`This ( ${this.state.newItemText} ) action already exsist !!`);
         }
     }
 
